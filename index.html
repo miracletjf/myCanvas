@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>我的画板</title>
+</head>
+<body>
+<canvas id="canvas" class="myCanvas" width="800" height="800"></canvas>
+<div class="operate">
+  <button class="btn active" id="paint" onclick="changePaint()">draw</button>
+  <button class="btn" id="rubber" onclick="changeRubber()">rubber</button>
+  <button class="btn" onclick="clearContent()">clear</button>
+</div>
+<div class="colors">
+  <button class="color active" style="background: #333;"></button>
+  <button class="color" style="background: #e03434;"></button>
+  <button class="color" style="background: #ffc645;"></button>
+  <button class="color" style="background: #59c75d;"></button>
+  <button class="color" style="background: #3180e2;"></button>
+</div>
+<div class="lines">
+  <h4>Lines</h4>
+  <div class="line" style="height: 3px;"></div>
+  <div class="line active" style="height: 5px;"></div>
+  <div class="line" style="height: 8px;"></div>
+  <div class="line" style="height: 12px"></div>
+</div>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
