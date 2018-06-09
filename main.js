@@ -92,6 +92,15 @@ function changeRubber() {
   config.mode = 'rubber';
 }
 
+function downloadImg(){
+  var link = document.createElement('a');
+  var evt = document.createEvent("HTMLEvents");
+  link.setAttribute('download', 'myPaint.png');
+  link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  link.click();
+  link.remove();
+}
+
 var colors = document.querySelectorAll('.color');
 var colorsArr = Array.prototype.slice.call(colors,0);
 var colorNumber = 0;
