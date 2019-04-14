@@ -15,7 +15,6 @@ var loc = {};
 
 if(canvas.ontouchstart !== undefined){
   canvas.ontouchstart = function (event) {
-    console.log(event);
     config.drawing = true;
     loc.x = event.targetTouches[0].clientX;
     loc.y = event.targetTouches[0].clientY;
@@ -23,7 +22,6 @@ if(canvas.ontouchstart !== undefined){
     context.lineWidth = config.width;
   };
   canvas.ontouchmove = function (event) {
-    console.log(event);
     var locNow = {};
     if(config.drawing){
       locNow.x = event.targetTouches[0].clientX;
@@ -65,9 +63,6 @@ if(canvas.ontouchstart !== undefined){
   };
 }
 
-
-
-
 function draw(startPosition,endPosition) {
   context.beginPath();
   context.moveTo(startPosition.x,startPosition.y);
@@ -93,12 +88,42 @@ function changeRubber() {
 }
 
 function downloadImg(){
+  if(!checkPlatform()){
+   downLoadImgPC() 
+  }else {
+   downLoadImgPhone(); 
+  }
+}
+
+// 下载图片（手机）
+function downLoadImgPhone() {
+  document.querySelector('#img').src = canvas.toDataURL("image/png");
+  document.querySelector('.pop-box').style.display = "block";
+}
+
+document.documentElement.addEventListener('touchstart',function(e){
+  if(e.target === document.querySelector('.pop-box') ||
+     e.target === document.querySelector('.preview') ||
+     e.target === document.querySelector('.pop-box h2')){
+    document.querySelector('.pop-box').style.display = "none";
+  }
+});
+
+// 下载图片（pc）
+function downLoadImgPC() {
   var link = document.createElement('a');
-  var evt = document.createEvent("HTMLEvents");
+  var evt = document.createEvent("MouseEvents");
   link.setAttribute('download', 'myPaint.png');
   link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
   link.click();
   link.remove();
+}
+
+// 通过检测设备是否支持 touchStart 事件 判断是否为 移动端
+
+function checkPlatform() {
+  var div = document.createElement('div');
+  return 'ontouchstart' in div;
 }
 
 var colors = document.querySelectorAll('.color');
